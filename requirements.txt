@@ -7,5 +7,8 @@ uvicorn
 pydantic
 python-dotenv
 joblib
-great-expectations
 pytest
+xgboost
+seaborn
+matplotlib
+gradio==4.16.0

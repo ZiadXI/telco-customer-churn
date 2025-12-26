@@ -1,4 +1,4 @@
-# Python
+# --- Python & Environment ---
 __pycache__/
 *.py[cod]
 *$py.class
@@ -19,63 +19,67 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# Virtual Environment
-.deployment/
+# Virtual Environment (Standard names + Windows root folders)
 venv/
-ENV/
 env/
-.venv
+.venv/
+ENV/
+Include/
+Lib/
+Scripts/
+share/
+pyvenv.cfg
 
-# Jupyter Notebook
-.ipynb_checkpoints
-*.ipynb_checkpoints/
+# --- Project Specifics ---
+.deployment/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
 
 # MLflow
 mlruns/
 mlartifacts/
+mlflow.db
 
-# Data files (if large)
+# --- Data & Artifacts ---
+# Ignore contents but keep folders (requires .gitkeep files inside)
 data/raw/*
-data/processed/*
-data/external/*
 !data/raw/.gitkeep
+data/processed/*
 !data/processed/.gitkeep
+data/external/*
 !data/external/.gitkeep
+data/validation_failures/*
+!data/validation_failures/.gitkeep
 
-# Model artifacts
+# Ignore large model artifacts
 artifacts/*
 !artifacts/.gitkeep
 
-# Environment variables
+# --- Configuration & Secrets ---
 .env
 .env.local
-
-# IDE
 .vscode/
 .idea/
 *.swp
-*.swo
-*~
 
-# OS
+# --- OS Junk ---
 .DS_Store
 Thumbs.db
 
-# Great Expectations
-great_expectations/.gitkeep
-great_expectations/expectations/
-great_expectations/validations/
-great_expectations/plugins/
+# --- Temporary Working Files ---
+workingfile.txt
+*.tmp
 
-# Logs
+# --- Logs & Testing ---
 *.log
 logs/
-
-# Testing
 .pytest_cache/
 .coverage
 htmlcov/
 
-# Docker
-docker-compose.override.yml
+# --- Great Expectations ---
+great_expectations/uncommitted/
