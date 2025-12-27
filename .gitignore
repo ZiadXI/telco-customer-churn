@@ -29,6 +29,7 @@ ENV/
 Include/
 Lib/
 Scripts/
+!scripts/
 share/
 pyvenv.cfg
 
