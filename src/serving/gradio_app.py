@@ -2,8 +2,6 @@ import gradio as gr
 import requests
 import json
 
-# --- CONFIGURATION ---
-# This is the URL of your running FastAPI server
 API_URL = "http://127.0.0.1:8000/predict"
 
 def predict_churn(
@@ -12,7 +10,6 @@ def predict_churn(
     device_protection, tech_support, streaming_tv, streaming_movies,
     contract, paperless_billing, payment_method, monthly_charges, total_charges
 ):
-    # 1. Prepare Payload (Matches the JSON your API expects)
     payload = {
         "gender": gender,
         "SeniorCitizen": int(senior_citizen),
@@ -36,22 +33,17 @@ def predict_churn(
     }
 
     try:
-        # 2. Send Request to FastAPI
         response = requests.post(API_URL, json=payload)
         
-        # 3. Handle Errors
         if response.status_code != 200:
             return f'<div style="color: #ef4444; font-weight: bold;">❌ API Error ({response.status_code}): {response.text}</div>'
         
-        # 4. Parse Response
         result = response.json()
         
-        # Extract values from your ChurnResponse schema
         proba = result["churn_probability"]
         prediction = result["churn_prediction"]
         probability_percent = proba * 100
 
-        # 5. Format Output (HTML)
         color = "#ef4444" if prediction == "Yes" else "#10b981" # Red vs Green
         status_text = "HIGH RISK" if prediction == "Yes" else "LOW RISK"
         icon = "⚠️" if prediction == "Yes" else "✅"
@@ -77,7 +69,6 @@ def predict_churn(
     except Exception as e:
         return f'<div style="color: red;">System Error: {str(e)}</div>'
 
-# --- NUCLEAR CSS (Same robust styling as before) ---
 nuclear_css = """
 :root, .gradio-container {
     --body-background-fill: #0b0f19 !important;
@@ -121,7 +112,6 @@ ul.options li.item {
 }
 """
 
-# --- UI Layout ---
 with gr.Blocks(theme=gr.themes.Default(), css=nuclear_css, title="Telco Churn AI") as demo:
     
     with gr.Row():
@@ -133,7 +123,6 @@ with gr.Blocks(theme=gr.themes.Default(), css=nuclear_css, title="Telco Churn AI
         )
 
     with gr.Row():
-        # --- Inputs ---
         with gr.Column(scale=2):
             with gr.Group():
                 gr.Markdown("###  Demographics")

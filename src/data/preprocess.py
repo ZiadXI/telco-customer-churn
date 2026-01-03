@@ -4,7 +4,6 @@ import pandas as pd
 
 def preprocess_data (df: pd.DataFrame,target_col: str="Churn") -> pd.DataFrame:
     df.columns = df.columns.str.strip()
-    # Only drop customerID if it exists (for training data, not inference)
     if 'customerID' in df.columns:
         df = df.drop(columns='customerID')
     
