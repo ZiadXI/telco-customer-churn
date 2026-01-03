@@ -10,8 +10,8 @@ app_port: 7860
 
 # 📉 Telco Customer Churn Prediction — End-to-End MLOps System
 
-![CI/CD Pipeline](https://github.com/ziadkassem/telco-churn-app/actions/workflows/ci_pipeline.yml/badge.svg)
-[![🤗 Hugging Face Spaces](https://img.shields.io/badge/Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/ziadkassem/telco-churn-app)
+![CI/CD Pipeline](https://github.com/ziadkassem/telco-churn-app/actions/workflows/ci_pipeline.yml/badge.svg?branch=main)
+[![🤗 Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/ziadkassem/telco-churn-app)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
 [![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED)](https://www.docker.com/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-005571?logo=fastapi)](https://fastapi.tiangolo.com/)
@@ -21,6 +21,12 @@ A **production-ready MLOps project** for predicting customer churn in the teleco
 This repository demonstrates how to move a machine learning model from **experimentation to deployment** using real-world MLOps practices.
 
 > 🎯 **Goal:** Build a reliable, validated, reproducible, and deployable ML system — not just a notebook model.
+
+---
+
+## 🔗 Live Demo
+The application is deployed and live on Hugging Face Spaces.  
+**Try it here:** [https://huggingface.co/spaces/ziadkassem/telco-churn-app](https://huggingface.co/spaces/ziadkassem/telco-churn-app)
 
 ---
 
@@ -109,7 +115,8 @@ This system predicts whether a customer is likely to churn based on demographics
 ├── Dockerfile                 # Container definition
 ├── requirements.txt           # Dependencies
 └── README.md
-````
+
+```
 
 ---
 
@@ -122,10 +129,11 @@ No local Python setup required.
 ```bash
 docker build -t churn-app .
 docker run -p 7860:7860 churn-app
+
 ```
 
-* **UI:** [http://localhost:7860](http://localhost:7860)
-* **API Docs:** [http://localhost:7860/docs](http://localhost:7860/docs)
+* **UI:** [http://localhost:7860](https://www.google.com/search?q=http://localhost:7860)
+* **API Docs:** [http://localhost:7860/docs](https://www.google.com/search?q=http://localhost:7860/docs)
 
 ---
 
@@ -134,6 +142,7 @@ docker run -p 7860:7860 churn-app
 ```bash
 pip install -r requirements.txt
 uvicorn src.serving.app:app --host 0.0.0.0 --port 7860 --reload
+
 ```
 
 ---
@@ -166,6 +175,7 @@ uvicorn src.serving.app:app --host 0.0.0.0 --port 7860 --reload
   "MonthlyCharges": 70.0,
   "TotalCharges": 840.0
 }
+
 ```
 
 ### Example Response
@@ -175,6 +185,7 @@ uvicorn src.serving.app:app --host 0.0.0.0 --port 7860 --reload
   "churn_probability": 0.73,
   "churn_prediction": true
 }
+
 ```
 
 ---
@@ -202,8 +213,8 @@ This guarantees every deployment is tested and reproducible.
 
 ## 👤 Author
 
-**Ziad Kassem**
-Computer Science & Data Science
+**Ziad Kassem** Computer Science & Data Science
+
 Focus: **MLOps, Production ML Systems, and Scalable AI**
 
 ---
