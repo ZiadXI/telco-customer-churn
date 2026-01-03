@@ -7,15 +7,16 @@ def _map_binary_series(s:pd.Series)->pd.Series:
 
 
   if valset == {"Yes","No"}:
-    return s.map({"Yes":1,"No":0}).astype("Int64")
+    return s.map({"Yes":1,"No":0}).fillna(0).astype(int)
 
   if valset== {"Male","Female"}:
-    return s.map({"Male":1,"Female":0})
+    return s.map({"Male":1,"Female":0}).fillna(0).astype(int)
 
   if len(vals)==2:
     sorted_vals = sorted(vals)
-    return s.astype(str).map({sorted_vals[0]:0,sorted_vals[1]:1}).astype("Int64")
+    return s.astype(str).map({sorted_vals[0]:0,sorted_vals[1]:1}).fillna(0).astype(int)
 
+  # If no match, return original but ensure it's converted to numeric if possible
   return s
 
 def build_features(df:pd.DataFrame,target_col:str="Churn")->pd.DataFrame:
@@ -55,6 +56,19 @@ def build_features(df:pd.DataFrame,target_col:str="Churn")->pd.DataFrame:
     for c in binary_features:
         if pd.api.types.is_integer_dtype(df[c]):
             df[c] = df[c].fillna(0).astype(int)
+
+ ##########################################################
+        # # Ensure binary features are numeric (handle case where _map_binary_series returned original)
+        # elif df[c].dtype == 'object':
+        #     # Force conversion: if it's still object, convert to numeric
+        #     df[c] = pd.to_numeric(df[c], errors='coerce').fillna(0).astype(int)
+    ########################################################
+    # Final check: ensure all remaining object columns (except target) are handled
+    remaining_object_cols = [c for c in df.select_dtypes(include='object').columns if c != target_col]
+    if remaining_object_cols:
+        print(f"Warning: Converting remaining object columns to numeric: {remaining_object_cols}")
+        for c in remaining_object_cols:
+            df[c] = pd.to_numeric(df[c], errors='coerce').fillna(0).astype(int)
 
     print(f" Feature engineering complete: {df.shape[1]} final features")
     return df        

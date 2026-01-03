@@ -4,8 +4,10 @@ import pandas as pd
 
 def preprocess_data (df: pd.DataFrame,target_col: str="Churn") -> pd.DataFrame:
     df.columns = df.columns.str.strip()
-    df = df.drop(columns='customerID')
+    if 'customerID' in df.columns:
+        df = df.drop(columns='customerID')
     
+
 
 
     if target_col in df.columns and df[target_col].dtype=="object":
