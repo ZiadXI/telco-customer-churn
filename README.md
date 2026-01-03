@@ -218,15 +218,3 @@ Focus: **MLOps, Production ML Systems, and Scalable AI**
 ⭐ If you find this project useful or inspiring, consider starring the repository.
 
 ```
-
-⬆️ **END — that’s the whole thing** ⬆️
-
-If this still breaks on GitHub, it means the file is **not named `README.md`** or you’re editing a non-Markdown file.
-
-If you want next:
-- architecture diagram
-- ultra-short recruiter README
-- resume bullets from this project
-
-Say it.
-```
