@@ -61,3 +61,75 @@ An End-to-End MLOps project that predicts customer churn using XGBoost. This sys
 ├── Dockerfile             # Container definition
 ├── requirements.txt       # Python dependencies
 └── README.md              # Project documentation
+
+💻 Installation & Usage
+Option 1: Run with Docker (Recommended)
+You don't need to install Python dependencies if you have Docker.
+
+
+# 1. Build the image
+docker build -t churn-app .
+
+# 2. Run the container (Map port 7860)
+docker run -p 7860:7860 churn-app
+Access UI: Open http://localhost:7860
+
+Access API Docs: Open http://localhost:7860/docs
+
+Option 2: Run Locally (Python)
+
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Run the server
+uvicorn src.serving.app:app --host 0.0.0.0 --port 7860 --reload
+🔌 API Documentation
+The API automatically generates Swagger documentation.
+
+Endpoint: POST /predict
+
+Example Request:
+
+JSON
+
+{
+  "gender": "Male",
+  "SeniorCitizen": 0,
+  "Partner": "No",
+  "Dependents": "No",
+  "tenure": 12,
+  "PhoneService": "Yes",
+  "MultipleLines": "No",
+  "InternetService": "Fiber optic",
+  "OnlineSecurity": "No",
+  "OnlineBackup": "No",
+  "DeviceProtection": "No",
+  "TechSupport": "No",
+  "StreamingTV": "Yes",
+  "StreamingMovies": "Yes",
+  "Contract": "Month-to-month",
+  "PaperlessBilling": "Yes",
+  "PaymentMethod": "Electronic check",
+  "MonthlyCharges": 70.0,
+  "TotalCharges": 840.0
+}
+🔄 CI/CD Pipeline Architecture
+
+This project uses a "GitOps" approach to deployment:
+
+Push: Code is pushed to the main branch.
+
+Test: GitHub Actions spins up a runner to install dependencies and run pytest.
+
+Validate: The Docker build process is verified to ensure the container is valid.
+
+Deploy: If all tests pass, the code is synced to the Hugging Face Hub, triggering a production rebuild.
+
+🔮 Future Improvements
+Implement Drift Detection (EvidentlyAI) to monitor data distribution changes over time.
+
+Add Model Registry integration (connecting local MLflow to a remote server).
+
+Enhance unit test coverage for edge cases in feature engineering.
+
+Built by Ziad Kassem
