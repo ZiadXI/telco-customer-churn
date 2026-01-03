@@ -10,7 +10,7 @@ def validate_rules(row:User):
 
     if total < monthly:
      raise ValueError(f"TotalCharges ({total}) must be >= MonthlyCharges ({monthly})")
-
+ 
 
     
     allowed_gender =["Male","Female"]

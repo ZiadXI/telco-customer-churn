@@ -82,5 +82,6 @@ logs/
 .coverage
 htmlcov/
 
-# --- Great Expectations ---
-great_expectations/uncommitted/
+# Gradio
+.gradio/
+flagged/
