@@ -1,24 +1,11 @@
-## How to ins libs
+---
+title: Telco Customer Churn
+emoji: 📉
+colorFrom: blue
+colorTo: red
+sdk: docker
+pinned: false
+app_port: 7860
+---
 
-mkdir -p \
-data/raw data/processed data/external \
-notebooks \
-src/data src/features src/models src/utils \
-app \
-configs \
-scripts \
-tests \
-.github/workflows \
-docker \
-great_expectations \
-mlruns \
-artifacts
-
---------------------------------------------------------
-
-python -m venv .deployment
-source .deployment/Scripts/activate
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-
-
+# Telco Customer Churn Prediction
