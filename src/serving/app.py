@@ -13,12 +13,9 @@ from src.serving.schema import ChurnRequest, ChurnResponse
 from src.serving.validator import validate_churn_request
 from src.data.preprocess import preprocess_data
 from src.features.build_features import build_features
-
 from src.serving.gradio_app import demo 
 
 app = FastAPI(title="Telco Churn Prediction API")
-
-app = gr.mount_gradio_app(app, demo, path="/") 
 
 @app.get("/health")
 def root():
@@ -66,6 +63,7 @@ def predict_churn(request: ChurnRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
 
+app = gr.mount_gradio_app(app, demo, path="/")
     #uvicorn app:app --reload 
 
     
