@@ -73,6 +73,7 @@ def predict_churn(request: ChurnRequest):
 
     #uvicorn app:app --reload 
 
+    
 
 #     {
 #   "gender": "Male",
