@@ -2,7 +2,7 @@ import gradio as gr
 import requests
 import json
 
-API_URL = "http://127.0.0.1:8000/predict"
+API_URL = "http://127.0.0.1:7860/predict"
 
 def predict_churn(
     gender, senior_citizen, partner, dependents, tenure, phone_service,
