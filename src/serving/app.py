@@ -2,8 +2,8 @@ import sys
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
 import pandas as pd
+import gradio as gr 
 
-# Add project root to Python path to fix "no module named src" error
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
@@ -14,17 +14,18 @@ from src.serving.validator import validate_churn_request
 from src.data.preprocess import preprocess_data
 from src.features.build_features import build_features
 
+from src.serving.gradio_app import demo 
+
 app = FastAPI(title="Telco Churn Prediction API")
 
+app = gr.mount_gradio_app(app, demo, path="/") 
 
 @app.get("/health")
 def root():
     return {"Status": "ok"}
 
-
 @app.post("/predict", response_model=ChurnResponse)
 def predict_churn(request: ChurnRequest):
-    # Validate the request before processing
     is_valid, validation_errors = validate_churn_request(request)
     if not is_valid:
         raise HTTPException(
@@ -64,12 +65,6 @@ def predict_churn(request: ChurnRequest):
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
-
-
-
-
-
-
 
     #uvicorn app:app --reload 
 
